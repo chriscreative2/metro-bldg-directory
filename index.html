@@ -432,8 +432,8 @@
           const row = document.createElement("div");
           row.className = "tenant-row";
           row.innerHTML = `
-            <input type="text" placeholder="Company Name" value="${tenant.name}" onchange="updateTenant(${index}, 'name', this.value)">
-            <input type="text" placeholder="Suite" value="${tenant.suite}" onchange="updateTenant(${index}, 'suite', this.value)">
+            <input type="text" placeholder="Company Name" value="${tenant.name}" oninput="updateTenant(${index}, 'name', this.value)">
+            <input type="text" placeholder="Suite" value="${tenant.suite}" oninput="updateTenant(${index}, 'suite', this.value)">
             <button onclick="removeTenant(${index})" style="background: #dc3545; color: white; padding: 6px 12px; margin-top: 5px;">Remove</button>
           `;
           container.appendChild(row);
@@ -490,10 +490,14 @@
         document.querySelector(".footer-center p:nth-child(4)").textContent =
           document.getElementById("edit-phone").value;
 
-        // Update table
+        // Update table (sorted by suite number)
         const tbody = document.querySelector("tbody");
         tbody.innerHTML = "";
-        tenants.forEach((tenant) => {
+        [...tenants].sort((a, b) => {
+          const suiteA = parseInt(a.suite) || Infinity;
+          const suiteB = parseInt(b.suite) || Infinity;
+          return suiteA - suiteB;
+        }).forEach((tenant) => {
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${tenant.name}</td>
