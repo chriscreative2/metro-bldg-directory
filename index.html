@@ -390,6 +390,7 @@
         { name: "Jeffrey P. Davis, DDS, PC", suite: "208" },
         { name: "Modera Wealth Management, LLC", suite: "210" },
         { name: "Dr. Marwan R. Khalifeh, MD", suite: "300" },
+        { name: "Washington Nerve Institute / Dr. Ivica Ducic", suite: "300" },
         {
           name: "National Center for Plastic Surgery - Administration",
           suite: "302",
@@ -421,6 +422,7 @@
       document.body.classList.add("edit-mode");
       document.getElementById("edit-panel").style.display = "block";
       renderTenants();
+      updatePreview();
       attachInputListeners();
 
       function renderTenants() {
